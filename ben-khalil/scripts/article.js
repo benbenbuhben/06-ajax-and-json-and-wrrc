@@ -21,7 +21,7 @@ Article.prototype.toHtml = function () {
 
   // COMMENT: What is going on in the line below? What do the question mark and colon represent? How have we seen this same logic represented previously?
   // If the publishedOn checkbox is clicked, then its value will be truthy and the publishStatus property of the object will be assigned the value of 'published x number of days ago'. If it remains unchecked, the publishStatus property will be 'draft'.
-  // 
+  //
   this.publishStatus = this.publishedOn ? `published ${this.daysAgo} days ago` : '(draft)';
   this.body = marked(this.body);
 
@@ -33,7 +33,7 @@ Article.prototype.toHtml = function () {
 // REVIEW: This function will take the rawData, how ever it is provided, and use it to instantiate all the articles. This code is moved from elsewhere, and encapsulated in a simply-named function for clarity.
 
 // COMMENT: Where is this function called? What does 'rawData' represent now? How is this different from previous labs?
-// PUT YOUR RESPONSE HERE
+// This function is called inside the Article.fetchAll function. Raw data now represents the data inside the local storage.
 Article.loadAll = articleData => {
   //console.log(articleData);
   articleData.sort((a, b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)))
@@ -68,10 +68,11 @@ Article.fetchAll = () => {
         articleView.initIndexPage();
       })
       .catch(err => console.error('You suck', err));
+    // When we don't already have the rawData, we need to retrieve the JSON file from the server with AJAX, cache it in localStorage, then load all the data into Article.all with the Article.loadAll function above, and then render the index page.
 
-  
 
-      
+
+
 
 
 
